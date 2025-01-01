@@ -3,6 +3,11 @@
 const header = document.querySelector('header');
 const toggle = document.querySelector('#toggle');
 
+toggle.textContent = "☀️";
+
+header.appendChild(toggle);
+
+
 
 // TODO: Create a function called `readLocalStorage` that reads from local storage and returns the data. If no data exists, return an empty array.
 
