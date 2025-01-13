@@ -1,9 +1,31 @@
 // TODO: Create logic to toggle the light/dark mode styles for the page and circle. The mode should be saved to local storage.
 
-const header = document.querySelector('header');
-const toggle = document.querySelector('#toggle');
+const container = document.querySelector('.container');
+const themeSwitcher = document.querySelector('#theme-switcher');
+const emoji = document.getElementById('emoji');
 
-toggle.textContent = "☀️";
+let mode = localStorage.getItem("mode") || 'dark';
+// let mode = "dark";
+
+
+
+themeSwitcher.addEventListener('click', function(){
+  if(mode === 'dark') {
+    mode = 'light';
+    container.setAttribute('class', 'light');
+    emoji.textContent = "☀️";
+    
+  }
+  else {
+    mode = 'dark';
+    container.setAttribute('class', 'dark');
+    emoji.textContent = "🌙";
+  }
+
+  localStorage.setItem('mode', mode);
+});
+
+
 
 header.appendChild(toggle);
 

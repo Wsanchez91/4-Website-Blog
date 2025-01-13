@@ -74,7 +74,7 @@ ul {
 header {
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-between;
+  justify-content: end;
 }
 
 header,
@@ -129,3 +129,9 @@ main {
   cursor: pointer;
   text-shadow: 0px 0px .5rem var(--light-accent);
 }
+
+
+#emoji{
+  cursor: pointer;
+}
+
