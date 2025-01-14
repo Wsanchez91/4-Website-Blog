@@ -7,27 +7,35 @@ const emoji = document.getElementById('emoji');
 let mode = localStorage.getItem("mode") || 'dark';
 // let mode = "dark";
 
-
-
-themeSwitcher.addEventListener('click', function(){
-  if(mode === 'dark') {
-    mode = 'light';
-    container.setAttribute('class', 'light');
-    emoji.textContent = "☀️";
-    
+document.addEventListener('DOMContentLoaded', function() {
+  if (mode === 'light') {
+      container.setAttribute('class', 'light');
+      emoji.textContent = "☀️"; // Sun emoji for light mode
+      themeSwitcher.checked = true; // Check the checkbox if light mode is active
+  } else {
+      container.setAttribute('class', 'dark');
+      emoji.textContent = "🌙"; // Moon emoji for dark mode
+      themeSwitcher.checked = false; // Uncheck the checkbox if dark mode is active
   }
-  else {
-    mode = 'dark';
-    container.setAttribute('class', 'dark');
-    emoji.textContent = "🌙";
+});
+
+themeSwitcher.addEventListener('change', function() {
+  if (themeSwitcher.checked) {
+      mode = 'light';
+      container.setAttribute('class', 'light');
+      emoji.textContent = "☀️"; // Change emoji to sun
+  } else {
+      mode = 'dark';
+      container.setAttribute('class', 'dark');
+      emoji.textContent = "🌙"; // Change emoji to moon
   }
 
-  localStorage.setItem('mode', mode);
+  localStorage.setItem('mode', mode); // Save the mode to local storage
 });
 
 
 
-header.appendChild(toggle);
+// header.appendChild(toggle);
 
 
 

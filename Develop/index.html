@@ -13,48 +13,36 @@
     <script defer src="./assets/js/form.js" type="text/javascript"></script>
   </head>
   <body>
-    <div class="container dark">
-    <header>
-      <div id="toggle">
-        <lable class="switch col">
-          <input type="checkbox"
-          id="theme-switcher" class="custom-checkbox" style="display: none;">
-          <span id="emoji">🌙</span>
-          </label>
-        </lable>
+      <div class="container dark">
+          <header>
+              <div id="toggle">
+                  <label class="switch col">
+                      <input type="checkbox" id="theme-switcher" style="display: none;">
+                      <span id="emoji">🌙</span>
+                  </label>
+              </div>
+          </header>
+          <main>
+              <aside>
+                  <h2>My First Blog</h2>
+              </aside>
+              <section>
+                  <h2>What's on your mind?</h2>
+                  <form>
+                      <label for="username">Username</label>
+                      <input type="text" id="username" name="username" /><br /><br />
+                      <label for="titlename">Title</label>
+                      <input type="text" id="title" name="titlename" /><br /><br />
+                      <label for="contentname">Content</label>
+                      <textarea type="text" id="content" name="contentname"></textarea> <br>
+                      <label for="submitBTN">Submit</label>
+                      <input type="submit" id="submit" name="submit" />
+  
+                      <p id="error"></p>
+                  </form>
+              </section>
+          </main>
+          <footer></footer>
       </div>
-    </header>
-    <main>
-      <aside>
-        <h2>My First Blog</h2>
-      </aside>
-      <section>
-        <h2>What's on your mind?</h2>
-        <form>
-          <label for="username">Username</label>
-          <input type="text" id="username" name="username" /><br /><br />
-          <label for="titlename">Title</label>
-          <input type="text" id="title" name="titlename" /><br /><br />
-          <label for="contentname">Content</label>
-          <textarea type="text" id="content" name="contentname"></textarea> <br>
-          <label for="submitBTN">Submit</label>
-          <input type="submit" id="submit" name="submit" />
-
-          <p id="error"></p>
-        </form>
-      </section>
-
-      <!-- A form element that contains the following: -->
-
-      <!-- An input element whose label and id are `username` -->
-
-      <!-- An input element whose label and id are `title` -->
-
-      <!-- A textarea element whose label and id are `content` -->
-
-      <!-- A p element whose id is `error` -->
-    </main>
-    <footer></footer>
-    </div>
   </body>
-</html>
+  </html>
