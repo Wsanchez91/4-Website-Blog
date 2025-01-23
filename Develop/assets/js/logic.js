@@ -1,56 +1,65 @@
 // TODO: Create logic to toggle the light/dark mode styles for the page and circle. The mode should be saved to local storage.
 
-const container = document.querySelector('.container');
-const themeSwitcher = document.querySelector('#theme-switcher');
-const emoji = document.getElementById('emoji');
+const container = document.querySelector(".container");
+const themeSwitcher = document.querySelector("#theme-switcher");
+const emoji = document.getElementById("emoji");
 
-let mode = localStorage.getItem("mode") || 'dark';
+let mode = localStorage.getItem("mode") || "dark";
 // let mode = "dark";
 
-document.addEventListener('DOMContentLoaded', function() {
-  if (mode === 'light') {
-      container.setAttribute('class', 'light');
-      emoji.textContent = "☀️"; // Sun emoji for light mode
-      themeSwitcher.checked = true; // Check the checkbox if light mode is active
+document.addEventListener("DOMContentLoaded", function () {
+  if (mode === "light") {
+    container.setAttribute("class", "light");
+    emoji.textContent = "☀️"; // Sun emoji for light mode
+    themeSwitcher.checked = true; // Check the checkbox if light mode is active
   } else {
-      container.setAttribute('class', 'dark');
-      emoji.textContent = "🌙"; // Moon emoji for dark mode
-      themeSwitcher.checked = false; // Uncheck the checkbox if dark mode is active
+    container.setAttribute("class", "dark");
+    emoji.textContent = "🌙"; // Moon emoji for dark mode
+    themeSwitcher.checked = false; // Uncheck the checkbox if dark mode is active
   }
 });
 
-themeSwitcher.addEventListener('change', function() {
+themeSwitcher.addEventListener("change", function () {
   if (themeSwitcher.checked) {
-      mode = 'light';
-      container.setAttribute('class', 'light');
-      emoji.textContent = "☀️"; // Change emoji to sun
+    mode = "light";
+    container.setAttribute("class", "light");
+    emoji.textContent = "☀️"; // Change emoji to sun
   } else {
-      mode = 'dark';
-      container.setAttribute('class', 'dark');
-      emoji.textContent = "🌙"; // Change emoji to moon
+    mode = "dark";
+    container.setAttribute("class", "dark");
+    emoji.textContent = "🌙"; // Change emoji to moon
   }
 
-  localStorage.setItem('mode', mode); // Save the mode to local storage
+  localStorage.setItem("mode", mode); // Save the mode to local storage
 });
-
-
 
 // header.appendChild(toggle);
 
-
-
 // TODO: Create a function called `readLocalStorage` that reads from local storage and returns the data. If no data exists, return an empty array.
 
+function readLocalStorage() {
+  if (localStorage.getItem("key") !== null) {
+    return localStorage.getItem("key");
+  } else {
+    return [];
+  }
+}
 
 // TODO: Create a function called `storeLocalStorage` that takes a given object and saves the new data to the existing blog data in local storage.
 
+function storeLocalStorage (newData){
+const key = "blogData";
+let existingData = localStorage.getItem(key);
+existingData = existingData? JSON.parse(existingData):[];
+existingData.push(newData);
+localStorage.setItem(key, JSON.stringify(existingData));
+};
 
 // ! Use the following function whenever you need to redirect to a different page
 
-let redirectURL = '';
+let redirectURL = "";
 
 const redirectPage = function (url) {
   redirectURL = url;
   location.assign(url);
 };
-
