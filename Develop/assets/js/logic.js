@@ -1,21 +1,19 @@
-// TODO: Create logic to toggle the light/dark mode styles for the page and circle. The mode should be saved to local storage.
-
 const container = document.querySelector(".container");
 const themeSwitcher = document.querySelector("#theme-switcher");
 const emoji = document.getElementById("emoji");
 
 let mode = localStorage.getItem("mode") || "dark";
-// let mode = "dark";
+
 
 document.addEventListener("DOMContentLoaded", function () {
   if (mode === "light") {
     container.setAttribute("class", "light");
-    emoji.textContent = "☀️"; // Sun emoji for light mode
-    themeSwitcher.checked = true; // Check the checkbox if light mode is active
+    emoji.textContent = "☀️"; 
+    themeSwitcher.checked = true;
   } else {
     container.setAttribute("class", "dark");
-    emoji.textContent = "🌙"; // Moon emoji for dark mode
-    themeSwitcher.checked = false; // Uncheck the checkbox if dark mode is active
+    emoji.textContent = "🌙"; 
+    themeSwitcher.checked = false;
   }
 });
 
@@ -23,43 +21,63 @@ themeSwitcher.addEventListener("change", function () {
   if (themeSwitcher.checked) {
     mode = "light";
     container.setAttribute("class", "light");
-    emoji.textContent = "☀️"; // Change emoji to sun
+    emoji.textContent = "☀️";
   } else {
     mode = "dark";
     container.setAttribute("class", "dark");
-    emoji.textContent = "🌙"; // Change emoji to moon
+    emoji.textContent = "🌙";
   }
 
-  localStorage.setItem("mode", mode); // Save the mode to local storage
+  localStorage.setItem("mode", mode);
 });
 
-// header.appendChild(toggle);
 
-// TODO: Create a function called `readLocalStorage` that reads from local storage and returns the data. If no data exists, return an empty array.
+const form = document.querySelector("form");
+const usernameInput = document.querySelector("#username");
+const titleInput = document.querySelector("#title");
+const contentInput = document.querySelector("#content");
+const errorMessage = document.querySelector("#error");
 
-function readLocalStorage() {
-  if (localStorage.getItem("key") !== null) {
-    return localStorage.getItem("key");
-  } else {
-    return [];
+
+form.addEventListener("submit", function (event) {
+  event.preventDefault();
+  const username = usernameInput.value.trim();
+  const title = titleInput.value.trim();
+  const content = contentInput.value.trim();
+
+  
+  if (!username || !title || !content) {
+    errorMessage.textContent = "All fields are required!";
+    errorMessage.classList.add("text-danger");
+    return;
   }
+
+  const blogPost = {
+    username: username,
+    title: title,
+    content: content,
+    date: new Date().toLocaleString(), 
+  };
+
+ 
+  storeLocalStorage("blogPosts", blogPost);
+
+  
+  redirectPage("./blog.html");
+});
+
+
+function readLocalStorage(key) {
+  const data = localStorage.getItem(key);
+  return data ? JSON.parse(data) : [];
 }
 
-// TODO: Create a function called `storeLocalStorage` that takes a given object and saves the new data to the existing blog data in local storage.
-
-function storeLocalStorage (newData){
-const key = "blogData";
-let existingData = localStorage.getItem(key);
-existingData = existingData? JSON.parse(existingData):[];
-existingData.push(newData);
-localStorage.setItem(key, JSON.stringify(existingData));
-};
-
-// ! Use the following function whenever you need to redirect to a different page
-
-let redirectURL = "";
+function storeLocalStorage(key, newData) {
+  const existingData = readLocalStorage(key);
+  existingData.push(newData);
+  localStorage.setItem(key, JSON.stringify(existingData)); 
+}
 
 const redirectPage = function (url) {
-  redirectURL = url;
   location.assign(url);
 };

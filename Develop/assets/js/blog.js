@@ -1,23 +1,58 @@
-// TODO: Create a variable that selects the main element, and a variable that selects the back button element
+// Select the main element and the back button
+const mainArticle = document.querySelector("main"); // Main content area where blog posts are displayed
+const backBtn = document.querySelector("#back"); // Back button
 
-const mainArticle = document.querySelector("main");
-const backBtn = document.querySelector("#back");
+// Function to build and append elements to the DOM
+function newElement(tag, content, parent) {
+  const element = document.createElement(tag); // Create a new element
+  element.textContent = content; // Set its text content
+  parent.appendChild(element); // Append it to the parent
+}
 
-// TODO: Create a function that builds an element and appends it to the DOM
+// Function to display a "no posts" message
+function noPostDisplay() {
+  mainArticle.innerHTML = ""; // Clear existing content
+  const noPostsMessage = document.createElement("p");
+  noPostsMessage.classList.add("text-center", "mt-4");
+  noPostsMessage.textContent = "No blog posts to display.";
+  mainArticle.appendChild(noPostsMessage); // Add a message to the main element
+}
 
-function newElement(){
+// Function to render the list of blog posts
+function renderBlogList() {
+  const blogPosts = JSON.parse(localStorage.getItem("blogPosts")) || []; // Retrieve blog posts from local storage
+  mainArticle.innerHTML = ""; // Clear the main element
 
-};
+  if (blogPosts.length > 0) {
+    blogPosts.forEach((post) => {
+      const article = document.createElement("article");
+      article.classList.add("mb-4"); // Add spacing between articles
 
-// TODO: Create a function that handles the case where there are no blog posts to display
-function blogDisplay (){
-    if(){
-        
-    };
-};
+      const ul = document.createElement("ul");
+      const li = document.createElement("li");
 
-// TODO: Create a function called `renderBlogList` that renders the list of blog posts if they exist. If not, call the no posts function.
+      // Add title
+      newElement("h2", post.title, li);
 
-// TODO: Call the `renderBlogList` function
+      // Add content
+      newElement("p", `By: ${post.username}`, li);
+      newElement("blockquote", post.content, li);
 
-// TODO: Redirect to the home page using the `redirectPage` function found in logic.js when the back button is clicked
+      ul.appendChild(li);
+      article.appendChild(ul);
+      mainArticle.appendChild(article);
+    });
+  } else {
+    noPostDisplay(); // Display "no posts" message if the list is empty
+  }
+}
+
+// Call the renderBlogList function to display posts
+renderBlogList();
+
+// Redirect to the home page when the back button is clicked
+if (backBtn) {
+  backBtn.addEventListener("click", () => {
+    window.location.href = "./index.html"; // Redirect to the homepage
+  });
+}
